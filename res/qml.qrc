@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Button.qml</file>
+        <file>Player.qml</file>
+        <file>FilePicker.qml</file>
+    </qresource>
+</RCC>

@@ -14,11 +14,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick REQUIRED)
 
-set(PROJECT_SOURCES
-        main.cpp
-        qml.qrc
-)
-
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(fyi_test
         MANUAL_FINALIZATION
@@ -57,3 +52,7 @@ if(QT_VERSION_MAJOR EQUAL 6)
     qt_import_qml_plugins(fyi_test)
     qt_finalize_executable(fyi_test)
 endif()
+
+add_subdirectory("inc")
+add_subdirectory("res")
+add_subdirectory("src")

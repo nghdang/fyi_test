@@ -1,5 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
+#include "inc/FilePickerViewModel.hpp"
 
 
 int main(int argc, char *argv[])
@@ -11,6 +13,10 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
+
+    FilePickerViewModel filePickerViewModel;
+    engine.rootContext()->setContextProperty("filePickerViewModel", &filePickerViewModel);
+
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
