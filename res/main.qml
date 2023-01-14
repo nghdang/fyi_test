@@ -1,9 +1,10 @@
 import QtQuick 2.0
 import QtQuick.Window 2.12
+import QtQml 2.12
 
 Window {
     id: root
-    width: 640
+    width: 600
     height: 480
     visible: true
 
@@ -15,7 +16,9 @@ Window {
         text: "Open"
         color: "cyan"
 
-        onClicked: filePickerLoader.active = true
+        onClicked: {
+            filePickerLoader.active = true
+        }
     }
 
     Loader {
@@ -23,13 +26,16 @@ Window {
         active: false
         sourceComponent: FilePicker {
             id: filePicker
+            onFileSelected: {
+                filePickerLoader.active = false
+            }
         }
     }
 
     Rectangle {
         id: playerRect
-        width: 640
-        height: 400
+        width: root.width
+        height: 380
         anchors.top: filePickerButton.bottom
         color: "green"
 
@@ -37,6 +43,14 @@ Window {
             id: player
             anchors.fill: parent
             videoPath: filePickerViewModel.videoPath
+        }
+
+        PlayerSlider {
+            id: playerSlider
+            width: root.width
+            anchors {
+                bottom: parent.bottom
+            }
         }
     }
 

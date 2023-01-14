@@ -9,7 +9,7 @@ class FilePickerViewModel : public QObject
 
 
     Q_PROPERTY(QUrl currentDir READ getCurrentDir WRITE setCurrentDir NOTIFY currentDirChanged);
-    Q_PROPERTY(QString videoPath READ getVideoPath NOTIFY videoPathChanged);
+    Q_PROPERTY(QString videoPath READ getVideoPath WRITE setVideoPath NOTIFY videoPathChanged);
 public:
     explicit FilePickerViewModel(QObject *parent = nullptr);
     virtual ~FilePickerViewModel();
@@ -18,6 +18,7 @@ public:
     void setCurrentDir(QUrl value);
 
     QString getVideoPath();
+    void setVideoPath(QString);
 
     Q_INVOKABLE void selectFile();
 

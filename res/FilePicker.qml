@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.12
 import QtQuick.Window 2.12
 import Qt.labs.folderlistmodel 2.12
 
@@ -9,78 +9,70 @@ Window {
     visible: true
     color: "white"
 
-    readonly property int rowHeight: 46
-
-    signal fileSelected(string path)
+    signal fileSelected
 
     Row {
         id: headerRow
         width: parent.width
-        height: 46
+        height: 32
         anchors.left: parent.left
         Text {
-            width: 46
+            width: 32
             text: "Path:"
+            anchors.verticalCenter: parent.verticalCenter
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
         }
         Text {
             id: selectedPath
             text: filePickerViewModel.currentDir
+            anchors.verticalCenter: parent.verticalCenter
+            horizontalAlignment: Text.AlignLeft
+            verticalAlignment: Text.AlignVCenter
         }
     }
 
     FolderListModel {
         id: folderListModel
         folder: filePickerViewModel.currentDir
+        showDotAndDotDot: true
+        sortField: FolderListModel.Type
     }
 
     ListView {
         id: fileListView
         anchors {
-            top: headerRow.bottom
-            bottom: parent.bottom
             left: parent.left
             right: parent.right
+            top: headerRow.bottom
+            bottom: parent.bottom
         }
-        spacing: 10
+        spacing: 38
 
         model: folderListModel
-        delegate: fileDelegate
-    }
-
-    Component {
-        id: fileDelegate
-
-        Rectangle {
-            id: fileWraper
+        delegate: FilePickerRow {
             width: root.width
-            height: rowHeight
-            color: "transparent"
-
-            Rectangle {
-                id: fileIcon
-                width: rowHeight
-                height: rowHeight
-                anchors {
-                    left: parent.left
-                }
-                color: "cyan"
-            }
-
-            Text {
-                id: fileText
-                height: rowHeight
-                anchors.left: fileIcon.right
-                anchors.verticalCenter: parent.verticalCenter
-                text: fileName
-            }
-
-            MouseArea {
-                id: rowMouseArea
-                anchors.fill: parent
-                onClicked: {
-                    console.log(fileText.text)
+            isFolder: folderListModel.isFolder(index)
+            itemHeight: 32
+            itemText: fileName
+            enterDirHandler: function enterDir(path) {
+                folderListModel.folder = path
+                if (path.endsWith("..")) {
+                    filePickerViewModel.currentDir = path.split("/").slice(
+                                0, -2).join("/")
+                } else {
+                    filePickerViewModel.currentDir = path
                 }
             }
+            selectFileHanlder: function selectFile(path) {
+                filePickerViewModel.videoPath = path
+                root.fileSelected()
+            }
+        }
+        highlight: Rectangle {
+            color: "grey"
+            visible: fileListView.count !== 0
+            width: fileListView.currentItem == null ? 0 : fileListView.currentItem.width
         }
     }
 }

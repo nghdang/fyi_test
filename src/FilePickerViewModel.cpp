@@ -4,11 +4,9 @@
 
 FilePickerViewModel::FilePickerViewModel(QObject *parent)
     : m_currentDir(QDir::currentPath())
+    , m_videoPath("qrc:/that_girl.mp4")
     ,  QObject(parent)
 {
-//    m_videoPath = "file:///media/sf_lwp/demo.wmv";
-    m_videoPath = "file:///media/sf_lwp/AlarmLED_Segment_0_x264.mp4";
-    std::cout << "Current dir: " << QDir::currentPath().toStdString() << std::endl;
 }
 
 FilePickerViewModel::~FilePickerViewModel()
@@ -33,6 +31,15 @@ void FilePickerViewModel::setCurrentDir(QUrl value)
 QString FilePickerViewModel::getVideoPath()
 {
     return m_videoPath;
+}
+
+void FilePickerViewModel::setVideoPath(QString value)
+{
+    if (value != m_videoPath)
+    {
+        m_videoPath = value;
+        emit videoPathChanged();
+    }
 }
 
 void FilePickerViewModel::selectFile()

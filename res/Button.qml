@@ -5,6 +5,7 @@ Item {
 
     property string text
     property color color
+    property url image
 
     signal clicked
 
@@ -21,10 +22,19 @@ Item {
             verticalAlignment: Text.AlignVCenter
         }
 
+        Image {
+            id: buttonImage
+            anchors.fill: parent
+            source: root.image
+            fillMode: Image.PreserveAspectFit
+        }
+
         MouseArea {
             id: buttonMouseArea
             anchors.fill: parent
-            onClicked: root.clicked()
+            onClicked: {
+                root.clicked()
+            }
         }
     }
 }
