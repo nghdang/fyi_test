@@ -9,6 +9,7 @@ Rectangle {
     id: slider
     color: "darkGray"
     height: 5
+    radius: 5
 
     function calculateWidth() {
         return slider.width * (value / maximumValue)
@@ -16,9 +17,19 @@ Rectangle {
 
     Rectangle {
         id: playedBar
-        color: "blue"
         anchors.verticalCenter: parent.verticalCenter
         width: calculateWidth()
+        radius: 5
+        gradient: Gradient {
+            GradientStop {
+                position: 0.0
+                color: "lightBlue"
+            }
+            GradientStop {
+                position: 1.0
+                color: "blue"
+            }
+        }
         state: "default"
 
         states: [

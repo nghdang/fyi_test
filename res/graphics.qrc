@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>graphics/files.png</file>
+        <file>graphics/folder.png</file>
+        <file>graphics/file.png</file>
+        <file>graphics/next-track.png</file>
+        <file>graphics/previous-track.png</file>
+        <file>graphics/fast-forward.png</file>
+        <file>graphics/play-button.png</file>
+        <file>graphics/stop-button.png</file>
+        <file>graphics/rewind.png</file>
+        <file>graphics/menu.png</file>
+        <file>graphics/sound-off.png</file>
+        <file>graphics/sound-setting.png</file>
+        <file>graphics/pause-button.png</file>
+    </qresource>
+</RCC>

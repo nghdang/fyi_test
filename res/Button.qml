@@ -3,8 +3,8 @@ import QtQuick 2.0
 Item {
     id: root
 
-    property string text
-    property color color
+    property string text: ""
+    property color color: "transparent"
     property url image
 
     signal clicked

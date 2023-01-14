@@ -6,12 +6,16 @@ VideoOutput {
 
     property url videoPath
 
-    function start() {
+    function play() {
         mediaPlayer.play()
     }
     function pause() {
         mediaPlayer.pause()
     }
+    function stop() {
+        mediaPlayer.stop()
+    }
+
     function seek(position) {
         mediaPlayer.seek(position)
     }

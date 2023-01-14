@@ -30,7 +30,10 @@ Item {
                 left: parent.left
                 verticalCenter: parent.verticalCenter
             }
-            color: isFolder ? "cyan" : "black"
+            Image {
+                id: rowIconImage
+                source: isFolder ? "qrc:/graphics/folder.png" : "qrc:/graphics/file.png"
+            }
         }
 
         Text {

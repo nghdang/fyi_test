@@ -4,7 +4,7 @@
 
 FilePickerViewModel::FilePickerViewModel(QObject *parent)
     : m_currentDir(QDir::currentPath())
-    , m_videoPath("file:///home/dang/workspace/fyi_test/res/that_girl.mp4")
+    , m_videoPath("file:///home/dang/workspace/fyi_test/res/graphics/that_girl.mp4")
     ,  QObject(parent)
 {
 }
