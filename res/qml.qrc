@@ -5,7 +5,6 @@
         <file>Player.qml</file>
         <file>FilePicker.qml</file>
         <file>FilePickerRow.qml</file>
-        <file>that_girl.mp4</file>
         <file>PlayerSlider.qml</file>
     </qresource>
 </RCC>

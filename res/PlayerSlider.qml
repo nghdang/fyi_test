@@ -4,8 +4,6 @@ Rectangle {
     property int value: 0
     property int maximumValue: 100
 
-    signal pressed
-    signal released
     signal seeked(int seekValue)
 
     id: slider
@@ -17,23 +15,48 @@ Rectangle {
     }
 
     Rectangle {
-        color: "black"
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
+        id: playedBar
+        color: "blue"
+        anchors.verticalCenter: parent.verticalCenter
         width: calculateWidth()
+        state: "default"
+
+        states: [
+            State {
+                name: "default"
+                PropertyChanges {
+                    target: playedBar
+                    height: slider.height
+                }
+            },
+            State {
+                name: "entered"
+                when: sliderMouseArea.entered
+                PropertyChanges {
+                    target: playedBar
+                    height: slider.height + 5
+                }
+            }
+        ]
     }
 
     MouseArea {
+        id: sliderMouseArea
         anchors.fill: parent
-        onPressed: {
-            slider.pressed()
-        }
+        hoverEnabled: true
         onReleased: {
-            slider.released()
+            slider.seeked(value)
         }
         onMouseXChanged: {
-            if (mouseX > 0 && mouseX < width)
-                slider.seeked(maximumValue * (mouseX / width))
+            if (sliderMouseArea.pressed && mouseX > 0 && mouseX < width) {
+                value = Math.floor(maximumValue * (mouseX / width))
+            }
+        }
+        onEntered: {
+            playedBar.state = "entered"
+        }
+        onExited: {
+            playedBar.state = "default"
         }
     }
 }

@@ -24,4 +24,16 @@ VideoOutput {
         autoLoad: true
         source: root.videoPath
     }
+
+    PlayerSlider {
+        id: playerSlider
+        width: root.width
+        anchors {
+            bottom: parent.bottom
+        }
+        value: Math.floor(mediaPlayer.position / mediaPlayer.duration * 100)
+        onSeeked: {
+            mediaPlayer.seek(seekValue * mediaPlayer.duration / 100)
+        }
+    }
 }

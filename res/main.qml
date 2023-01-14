@@ -8,16 +8,19 @@ Window {
     height: 480
     visible: true
 
-    Button {
-        id: filePickerButton
-        width: 46
-        height: 46
+    Row {
+        id: headerBar
+        Button {
+            id: filePickerButton
+            width: 46
+            height: 46
 
-        text: "Open"
-        color: "cyan"
+            text: "Open"
+            color: "cyan"
 
-        onClicked: {
-            filePickerLoader.active = true
+            onClicked: {
+                filePickerLoader.active = true
+            }
         }
     }
 
@@ -36,7 +39,7 @@ Window {
         id: playerRect
         width: root.width
         height: 380
-        anchors.top: filePickerButton.bottom
+        anchors.top: headerBar.bottom
         color: "green"
 
         Player {
@@ -44,20 +47,13 @@ Window {
             anchors.fill: parent
             videoPath: filePickerViewModel.videoPath
         }
-
-        PlayerSlider {
-            id: playerSlider
-            width: root.width
-            anchors {
-                bottom: parent.bottom
-            }
-        }
     }
 
     Loader {
         id: playButtonLoader
         anchors {
             top: playerRect.bottom
+            topMargin: 5
             horizontalCenter: playerRect.horizontalCenter
         }
         active: true
@@ -80,6 +76,7 @@ Window {
         id: pauseButtonLoader
         anchors {
             top: playerRect.bottom
+            topMargin: 5
             horizontalCenter: playerRect.horizontalCenter
         }
         active: false
